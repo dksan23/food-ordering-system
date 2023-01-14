@@ -58,7 +58,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
     @Override
     public OrderCancelledEvent cancelOrderPayment(Order order) {
         order.initCancel();
-        log.info("order cancelling status");
+        log.info("order cancelling status set");
 
         return new OrderCancelledEvent(order, ZonedDateTime.now(ZoneId.of("UTC")));
     }
