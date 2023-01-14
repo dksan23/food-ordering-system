@@ -65,6 +65,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
 
     @Override
     public void cancelOrder(Order order) {
-
+        order.cancel();
+        log.info("order cancelled");
     }
 }
