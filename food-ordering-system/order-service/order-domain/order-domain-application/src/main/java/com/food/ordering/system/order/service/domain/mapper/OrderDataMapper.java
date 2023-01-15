@@ -8,11 +8,13 @@ import com.food.ordering.system.order.service.domain.dto.create.CreateOrderComma
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.dto.create.OrderAddress;
 import com.food.ordering.system.order.service.domain.dto.create.OrderItem;
+import com.food.ordering.system.order.service.domain.dto.track.TrackOrderResponse;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.entity.Product;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
 import com.food.ordering.system.order.service.domain.valueObject.StreetAddress;
 import com.food.ordering.system.common.domain.valueobject.Money;
+import com.food.ordering.system.order.service.domain.valueObject.TrackingId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -67,5 +69,13 @@ public class OrderDataMapper {
                 .orderStatus(orderResult.getOrderStatus())
                 .orderTrackingId(orderResult.getTrackingId().getValue())
                 .build();
+    }
+
+    public TrackOrderResponse orderToTrackOrderResponse(Order order) {
+
+        return TrackOrderResponse.builder().trackingId(order.getTrackingId().getValue())
+                .status(order.getOrderStatus())
+                .build();
+
     }
 }
