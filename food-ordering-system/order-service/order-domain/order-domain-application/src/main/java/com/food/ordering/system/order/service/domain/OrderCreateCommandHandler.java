@@ -28,21 +28,22 @@ public class OrderCreateCommandHandler {
 
     private  final OrderRepository orderRepository;
 
-    public OrderCreateCommandHandler(OrderDomainService orderDomainService, OrderRepository orderRepository, CustomerRepo customerRepo, RestaurantRepo restaurantRepo, OrderDataMapper orderDataMapper) {
-        this.orderDomainService = orderDomainService;
-        this.orderRepository = orderRepository;
-        this.customerRepo = customerRepo;
-        this.restaurantRepo = restaurantRepo;
-        this.orderDataMapper = orderDataMapper;
-    }
-
     private final CustomerRepo customerRepo;
 
     private final RestaurantRepo restaurantRepo;
 
     private final OrderDataMapper orderDataMapper;
 
+    public OrderCreateCommandHandler(OrderDomainService orderDomainService, OrderRepository orderRepository, CustomerRepo customerRepo, RestaurantRepo restaurantRepo, OrderDataMapper orderDataMapper, ApplicationDomainEventPublisher applicationDomainEventPublisher) {
+        this.orderDomainService = orderDomainService;
+        this.orderRepository = orderRepository;
+        this.customerRepo = customerRepo;
+        this.restaurantRepo = restaurantRepo;
+        this.orderDataMapper = orderDataMapper;
+        this.applicationDomainEventPublisher = applicationDomainEventPublisher;
+    }
 
+    private final ApplicationDomainEventPublisher applicationDomainEventPublisher;
     @Transactional
     CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand){
         checkCustomer(createOrderCommand.getCustomerId());
