@@ -29,6 +29,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 
@@ -143,7 +144,7 @@ public class OrderApplicationServiceTest {
         Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
 
         when(customerRepo.findCustomer(customerId)).thenReturn(Optional.of(customer));
-        when(restaurantRepo.findRestaurantInfo(orderDataMapper.createOrderCommandToRestaurant(createOrderCommand)))
+        when(restaurantRepo.findRestaurantInfo(eq(orderDataMapper.createOrderCommandToRestaurant(createOrderCommand))))
                 .thenReturn(Optional.of(restaurant));
         when(orderRepository.save(any(Order.class))).thenReturn(order);
 
